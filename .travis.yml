@@ -9,4 +9,4 @@ notifications:
   email: false
 after_success:
   - julia -e 'import Keys, Pkg; Pkg.add("Coverage"); import Coverage.Codecov; Keys |> pathof |> dirname |> Codecov.process_folder |> Codecov.submit'
-  - julia -e 'import Keys, Pkg; Pkg.add("Documenter"); joinpath(Keys |> pathof |> dirname |> dirname, "docs", "make.jl") |> include'
+  - julia -e 'import Keys, Pkg; ps=Pkg.PackageSpec(name="Documenter", version="0.19"); Pkg.add(ps); Pkg.pin(ps); joinpath(Keys |> pathof |> dirname |> dirname, "docs", "make.jl") |> include'
